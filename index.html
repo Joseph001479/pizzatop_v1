@@ -7536,7 +7536,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     this.data = await r.json();
                 } catch(e) { console.error(e); this.data = { active:false }; }
                 if (!this.data.active || !this.data.products || this.data.products.length === 0) {
-                    window.location.href = '/pizzatop_v1/checkout.php'; return;
+                    window.location.href = '/checkout.php'; return;
                 }
                 this.added = new Set();
                 this._render();
@@ -7651,7 +7651,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             },
 
-            skip() { window.location.href = '/pizzatop_v1/checkout.php'; },
+            skip() { window.location.href = '/checkout.php'; },
 
             _show() {
                 const ov = document.getElementById('upsell-overlay');
