@@ -1,0 +1,125 @@
+/* ===== CORES CUSTOMIZADAS ===== */
+/* Gerado automaticamente - Não editar manualmente */
+/* Última atualização: 2026-03-04 14:30:51 */
+
+:root {
+    --color-promo-bar: #9900d1;
+    --color-primary: #f50000;
+    --color-price: #22c518;
+    --color-button: #ed0707;
+    --color-menu-active: #c620c6;
+    --color-cart-header: #ed0707;
+    --color-cart-button: #ed0707;
+    --gradient-start: #0091ff;
+    --gradient-end: #009dff;
+}
+
+/* Barra de Promoção */
+.bg-\[\#6b21a8\] {
+    background-color: #9900d1 !important;
+}
+
+/* Cor Primária - APENAS textos e borders */
+.text-\[\#c620c6\] {
+    color: #f50000 !important;
+}
+
+.hover\:text-\[\#c620c6\]:hover {
+    color: #f50000 !important;
+}
+
+/* ===== PREÇOS (TODAS AS PÁGINAS) ===== */
+.price-text,
+.product-price,
+.cart-item-price,
+.total-price,
+.order-price {
+    color: #22c518 !important;
+}
+
+/* Preços específicos nos cards de produto */
+.card-product .text-\[19px\].font-bold {
+    color: #22c518 !important;
+}
+
+/* ===== BOTÕES (TODOS) ===== */
+.btn-add,
+.btn-action,
+.btn-buy,
+.btn-aproveitar,
+button[type="submit"].bg-\[\#c620c6\],
+button.bg-\[\#c620c6\] {
+    background: #ed0707 !important;
+}
+
+.btn-add svg {
+    stroke: white !important;
+}
+
+/* ===== COR PRIMÁRIA (badges, textos, títulos) ===== */
+.text-primary,
+.badge-primary,
+.complementos-gratis {
+    color: #f50000 !important;
+}
+
+/* Círculo do check (localização) */
+.bg-primary-circle {
+    background-color: #f50000 !important;
+}
+
+/* Título do rodapé */
+h3.text-primary {
+    color: #f50000 !important;
+}
+
+/* Modal da home - bordas e elementos primários */
+.modal-primary,
+.modal-border,
+.text-\[\#c620c6\].complementos-gratis {
+    color: #f50000 !important;
+}
+
+/* Corrigir roxos no modal */
+[class*="text-[#c620c6]"]:not(.price-text) {
+    color: #f50000 !important;
+}
+
+/* Carrinho - Header */
+#cart-modal .cart-header,
+.cart-header {
+    background: #ed0707 !important;
+}
+
+/* Carrinho - Botão Finalizar */
+#cart-modal .btn-checkout,
+.btn-checkout {
+    background: linear-gradient(135deg, #0091ff, #009dff) !important;
+}
+
+/* Degradê geral */
+.bg-gradient-custom {
+    background: linear-gradient(135deg, #0091ff, #009dff) !important;
+}
+
+/* Border colors */
+.border-\[\#c620c6\] {
+    border-color: #f50000 !important;
+}
+
+/* Badge "Aberto" */
+.badge-open,
+.text-white.px-2.py-0\.5.rounded-md.text-xs.font-medium {
+    background-color: #f50000 !important;
+}
+
+/* Links hover */
+a.hover-primary:hover {
+    color: #f50000 !important;
+}
+
+/* Admin - Menu ativo */
+.nav-item.active {
+    background: #c620c6 !important;
+    color: white !important;
+}
