@@ -73,7 +73,7 @@ $subtotal = $cart['subtotal'] ?? 0;
 <body>
 
 <div class="header">
-    <button onclick="window.location.href='/pizzatop_v1/index.html'">
+    <button onclick="window.location.href='/'">
         <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
     </button>
     <h1>Finalizar Pedido</h1>
@@ -86,7 +86,7 @@ $subtotal = $cart['subtotal'] ?? 0;
         <?php foreach ($items as $item): ?>
         <div class="order-item">
             <?php if (!empty($item['image'])): ?>
-            <img src="/pizzatop_v1/<?= htmlspecialchars($item['image']) ?>" alt="">
+            <img src="/<?= htmlspecialchars($item['image']) ?>" alt="">
             <?php endif; ?>
             <div class="order-item-info">
                 <div class="order-item-name"><?= htmlspecialchars($item['name']) ?></div>
@@ -181,15 +181,7 @@ $subtotal = $cart['subtotal'] ?? 0;
         <p style="font-size:12px;color:#9ca3af;">Após o pagamento, a confirmação é automática.</p>
     </div>
 
-    <div class="success-screen" id="success-screen">
-        <div class="success-icon">
-            <svg width="40" height="40" fill="none" stroke="white" viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <h2>Pagamento Confirmado! 🎉</h2>
-        <p>Seu pedido foi recebido e já está sendo preparado.<br>Em breve entraremos em contato pelo WhatsApp.</p>
-        <a href="/pizzatop_v1/" style="display:inline-block;margin-top:16px;font-size:13px;color:#6b7280;text-decoration:underline">Voltar ao cardápio</a>
-    </div>
-
+    <a href="/" style="display:inline-block;margin-top:16px;font-size:13px;color:#6b7280;text-decoration:underline">Voltar ao cardápio</a>
 </div>
 
 <script>
@@ -330,7 +322,7 @@ async function gerarPIX() {
     };
 
     try {
-        const response = await fetch('/pizzatop_v1/api/create-pix.php', {
+        const response = await fetch('/api/create-pix.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
@@ -373,7 +365,7 @@ async function gerarPIX() {
 
 async function verificarPagamento(id) {
     try {
-        const r = await fetch(`/pizzatop_v1/api/check-pix.php?id=${id}`);
+        const r = await fetch(`/api/check-pix.php?id=${id}`);
         const data = await r.json();
         if (data.status === 'paid') {
             clearInterval(pixCheckInterval);
@@ -383,7 +375,7 @@ async function verificarPagamento(id) {
             setTimeout(() => {
                 document.getElementById('pix-screen').style.display = 'none';
                 document.getElementById('success-screen').style.display = 'block';
-                fetch('/pizzatop_v1/api/clear-cart.php', { method: 'POST' });
+                fetch('/api/clear-cart.php', { method: 'POST' });
             }, 1500);
         }
     } catch(e) {}
