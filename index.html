@@ -7126,7 +7126,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             async load() {
                 try {
-                    const r = await fetch('/pizzatop_v1/api/get-cart.php');
+                    const r = await fetch('/api/get-cart.php');
                     const data = await r.json();
                     this.render(data);
                 } catch(e) { console.error('Erro ao carregar carrinho', e); }
@@ -7281,20 +7281,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 const fd = new FormData();
                 fd.append('item_id', itemId);
                 fd.append('change', change);
-                await fetch('/pizzatop_v1/api/update-cart-quantity.php', { method:'POST', body:fd });
+                await fetch('/api/update-cart-quantity.php', { method:'POST', body:fd });
                 this.load();
             },
 
             async removeItem(itemId) {
                 const fd = new FormData();
                 fd.append('item_id', itemId);
-                await fetch('/pizzatop_v1/api/remove-from-cart.php', { method:'POST', body:fd });
+                await fetch('/api/remove-from-cart.php', { method:'POST', body:fd });
                 this.load();
             },
 
             async clear() {
                 if (!confirm('Limpar o carrinho?')) return;
-                await fetch('/pizzatop_v1/api/clear-cart.php', { method:'POST' });
+                await fetch('/api/clear-cart.php', { method:'POST' });
                 this.close();
                 this.load();
             }
@@ -7312,7 +7312,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             async open(productId) {
                 try {
-                    const r = await fetch('/pizzatop_v1/api/get-product.php?id=' + productId);
+                    const r = await fetch('/api/get-product.php?id=' + productId);
                     const data = await r.json();
                     if (data.error) { console.error(data.error); return; }
                     this.current = data;
@@ -7454,7 +7454,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const obs = document.getElementById('pm-obs').value;
                 if (obs.trim()) fd.append('observations', obs);
                 try {
-                    const r = await fetch('/pizzatop_v1/api/add-to-cart.php', { method:'POST', body:fd });
+                    const r = await fetch('/api/add-to-cart.php', { method:'POST', body:fd });
                     const d = await r.json();
                     if (d.success !== false) {
                         this.close();
@@ -7494,7 +7494,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Botão + : se produto tem complementos ou obs → abre modal; senão → add direto
             async quickAdd(productId, price) {
                 try {
-                    const r = await fetch('/pizzatop_v1/api/get-product.php?id=' + productId);
+                    const r = await fetch('/api/get-product.php?id=' + productId);
                     const data = await r.json();
                     const hasCompl = data.categories && data.categories.length > 0;
                     const hasObs   = parseInt(data.product?.allow_observations || 0);
@@ -7509,7 +7509,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         const fd = new FormData();
                         fd.append('product_id', productId);
                         fd.append('total_price', price);
-                        const res = await fetch('/pizzatop_v1/api/add-to-cart.php', { method:'POST', body:fd });
+                        const res = await fetch('/api/add-to-cart.php', { method:'POST', body:fd });
                         const d = await res.json();
                         if (d.success !== false) {
                             await CartModal.load();
@@ -7532,7 +7532,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             async open() {
                 try {
-                    const r = await fetch('/pizzatop_v1/api/get-upsell.php');
+                    const r = await fetch('/api/get-upsell.php');
                     this.data = await r.json();
                 } catch(e) { console.error(e); this.data = { active:false }; }
                 if (!this.data.active || !this.data.products || this.data.products.length === 0) {
@@ -7618,19 +7618,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 const fd = new FormData();
                 fd.append('product_id', productId);
                 fd.append('total_price', price);
-                try { await fetch('/pizzatop_v1/api/add-to-cart.php', { method:'POST', body:fd }); } catch(e) {}
+                try { await fetch('/api/add-to-cart.php', { method:'POST', body:fd }); } catch(e) {}
             },
 
             async _removeFromCart(productId) {
                 // Remove o item mais recente deste produto do carrinho
                 try {
-                    const r = await fetch('/pizzatop_v1/api/get-cart.php');
+                    const r = await fetch('/api/get-cart.php');
                     const data = await r.json();
                     const item = (data.items || []).reverse().find(i => i.product_id == productId);
                     if (item) {
                         const fd = new FormData();
                         fd.append('item_id', item.id);
-                        await fetch('/pizzatop_v1/api/remove-from-cart.php', { method:'POST', body:fd });
+                        await fetch('/api/remove-from-cart.php', { method:'POST', body:fd });
                     }
                 } catch(e) {}
             },
@@ -7683,7 +7683,7 @@ document.addEventListener('DOMContentLoaded', function() {
             fd.append('total_price', price || 0);
             if (observations) fd.append('observations', observations);
             try {
-                const r = await fetch('/pizzatop_v1/api/add-to-cart.php', { method:'POST', body:fd });
+                const r = await fetch('/api/add-to-cart.php', { method:'POST', body:fd });
                 const d = await r.json();
                 if (d.success !== false) {
                     await CartModal.load();
@@ -7697,7 +7697,7 @@ document.addEventListener('DOMContentLoaded', function() {
             fd.append('total_price', price || 0);
             if (observations) fd.append('observations', observations);
             try {
-                const r = await fetch('/pizzatop_v1/api/add-to-cart.php', { method:'POST', body:fd });
+                const r = await fetch('/api/add-to-cart.php', { method:'POST', body:fd });
                 const d = await r.json();
                 if (d.success !== false) {
                     await CartModal.load();
@@ -7981,7 +7981,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <span id="upsell-skip-label">Não quero. Finalizar</span>
                     <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
                 </button>
-                <a href="/checkout" id="upsell-btn-cont" style="display:none;width:100%;padding:14px;background:#22c55e;color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;align-items:center;justify-content:center;gap:8px;text-decoration:none;box-sizing:border-box;">
+                <a href="/checkout.php" id="upsell-btn-cont" style="display:none;width:100%;padding:14px;background:#22c55e;color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;align-items:center;justify-content:center;gap:8px;text-decoration:none;box-sizing:border-box;">
                     <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                     <span id="upsell-cont-label">Continuar com 1 item adicionado</span>
                     <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
